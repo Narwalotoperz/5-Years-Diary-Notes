@@ -22,11 +22,11 @@ A big advantage of the digital version of the notebook is that we are not limite
 
 Notes are stored in the following format:
 
-DD.MM.YYYY.
-Your note text here...
+    DD.MM.YYYY.
+    Your note text here...
 
-DD.MM.YYYY.
-Another note here...
+    DD.MM.YYYY.
+    Another note here...
 
 ## Running the App
 Open terminal in main.py location and run:

@@ -6,6 +6,44 @@ import html
 
 file_path = "diary_file.txt"
 
+translations = {
+    "title": {
+        "pl": "Notatnik codzienny",
+        "en": "Diary Note"
+    },
+    "subtitle": {
+        "pl": "Jak Ci minął dzień",
+        "en": "How was your day?"
+    
+    },
+    "note_label": {
+        "pl": "Napisz co się dziś wydarzyło i jak się czyjesz:",
+        "en": "Wright something about your day:"
+    },
+    "save_button": {
+        "pl": "Zapisz",
+        "en": "Save"
+    },
+    "success_save_msg": {
+        "pl": "Notatka zapisana pomyślnie!",
+        "en": "Note saved successfully!"
+    },
+    "success_edit_msg": {
+        "pl": "Notatka edytowana pomyślnie!",
+        "en": "Note edit successfully!"
+    },
+    "edit": {
+        "pl": "Edytuj",
+        "en": "Edit"
+    }
+}
+
+lang = st.sidebar.radio(
+    " ",
+    options=["pl", "en"],
+    captions=["Polski", "English"],
+
+)
 
 st.markdown(
     """
@@ -60,7 +98,7 @@ def save_note_and_clear():
         with open(file_path, 'w') as file:
             file.writelines(new_lines)
 
-        st.success("Note edited successfully!")
+        st.success(translations["success_edit_msg"][lang])
         st.session_state["edit"] = False
                 
     else:
@@ -70,17 +108,17 @@ def save_note_and_clear():
             with open(file_path, 'a') as file:
                 file.write(f"{today_str}.\n{note_text}\n\n")
             st.session_state.note_input = "" 
-            st.success("Note saved successfully!")
+            st.success(translations["success_edit_msg"][lang])
         else:
             st.warning("Cannot save an empty note.")
 
 st.set_page_config(page_title="Note", layout="centered", page_icon="☀️")
 
-st.title("Diary Note")
-st.header("How was your day?")
+st.title(translations["title"][lang])
+st.header(translations["subtitle"][lang])
 
 st.text_area(
-    "Wright something about your day:",
+    translations["note_label"][lang],
     key="note_input",
     on_change=save_note_and_clear,
     height= "content"
@@ -114,7 +152,7 @@ for index, row in today_df.iterrows():
             col1, col2 , col3 = st.columns([2,2,1])
 
             with col3:
-                if st.button("Edit"):
+                if st.button(translations["edit"][lang]):
                     if "edit" not in st.session_state:
                         st.session_state["edit"] = True
             if "edit" in st.session_state:

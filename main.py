@@ -35,6 +35,14 @@ translations = {
     "edit": {
         "pl": "Edytuj",
         "en": "Edit"
+    },
+    "page_title":{
+        "pl": "Notatki",
+        "en": "Note"
+    },
+    "placeholder":{
+        "pl": "Nie możesz uzupełnić kolejnej notatki, jedna na dziś jest już zapisana.",
+        "en":"You cannot enter another note because the note for today is already saved."
     }
 }
 
@@ -112,24 +120,34 @@ def save_note_and_clear():
         else:
             st.warning("Cannot save an empty note.")
 
-st.set_page_config(page_title="Note", layout="centered", page_icon="☀️")
+st.set_page_config(page_title=translations["page_title"][lang], layout="centered", page_icon="☀️")
 
 st.title(translations["title"][lang])
 st.header(translations["subtitle"][lang])
 
+df = load_notes()
+if not df.empty:
+    today_note = df[
+        df['date_formated'] == dt.today().date()
+    ].reset_index(drop = True)
+else:
+    today_note = pd.DataFrame
+
 st.text_area(
     translations["note_label"][lang],
     key="note_input",
+    placeholder = translations["placeholder"][lang] if not today_note.empty else " ",
     on_change=save_note_and_clear,
-    height= "content"
+    height= "content",
+    disabled= True if not today_note.empty else False
 )
 
-df = load_notes()
 today = dt.today().date()
 today_df = df[
     (df['date_formated'].apply(lambda d: d.month) == today.month) &
     (df['date_formated'].apply(lambda d: d.day) == today.day)
 ].reset_index(drop = True)
+
 
 
 for index, row in today_df.iterrows():

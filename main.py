@@ -3,68 +3,28 @@ import regex as re
 from datetime import datetime as dt
 import pandas as pd
 import html
+import json
 
 file_path = "diary_file.txt"
 
-translations = {
-    "title": {
-        "pl": "Notatnik codzienny",
-        "en": "Diary Note"
-    },
-    "subtitle": {
-        "pl": "Jak Ci minął dzień",
-        "en": "How was your day?"
-    
-    },
-    "note_label": {
-        "pl": "Napisz co się dziś wydarzyło i jak się czyjesz:",
-        "en": "Wright something about your day:"
-    },
-    "save_button": {
-        "pl": "Zapisz",
-        "en": "Save"
-    },
-    "success_save_msg": {
-        "pl": "Notatka zapisana pomyślnie!",
-        "en": "Note saved successfully!"
-    },
-    "success_edit_msg": {
-        "pl": "Notatka edytowana pomyślnie!",
-        "en": "Note edit successfully!"
-    },
-    "edit": {
-        "pl": "Edytuj",
-        "en": "Edit"
-    },
-    "page_title":{
-        "pl": "Notatki",
-        "en": "Note"
-    },
-    "placeholder":{
-        "pl": "Nie możesz uzupełnić kolejnej notatki, jedna na dziś jest już zapisana.",
-        "en":"You cannot enter another note because the note for today is already saved."
-    }
+with open("translations.json", "r") as f:
+    translations = json.load(f)
+
+form_map = {
+    "mood": {
+        "😀": 5, "🙂": 4, "😐": 3, "😕": 2, "☹️": 1, None: 0
+        },
+    "phisical": {
+        "💪": 4, "👍": 3, "👎": 2, "🖕": 1, None: 0
+        },   
+    "pride": {
+        ":rainbow[Yes]": "Yes", "So so": "So so", "No": "No", None: None
+        },
+    "relations": {
+        "💕": 4, "🤍": 3, "❤️‍🩹": 2, "💔": 1, None: 0
+        }
+
 }
-
-lang = st.sidebar.radio(
-    " ",
-    options=["pl", "en"],
-    captions=["Polski", "English"],
-
-)
-
-st.markdown(
-    """
-    <style>
-    textarea {
-        font-family: "Courier New", monospace !important;
-        font-size: 14px !important;
-        color: #333333 !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 def load_notes(n = 0):
     with open(file_path, 'r') as file:
@@ -119,6 +79,63 @@ def save_note_and_clear():
             st.success(translations["success_edit_msg"][lang])
         else:
             st.warning("Cannot save an empty note.")
+
+with st.sidebar:
+    on = st.selectbox(
+        " ",
+        ("Polski", "English"),
+    )
+    if on == "Polski":
+        lang = "pl"
+    else:
+        lang = "en" 
+    with st.expander(translations["form_title"][lang]):
+        with st.form("my_form", border = False):
+            mood = st.pills(translations["form_mood"][lang], ["😀", "🙂", "😐", "😕", "☹️"] , selection_mode="single")
+
+            phisical = st.pills(translations["form_phisical"][lang], ["💪", "👍", "👎", "🖕"] , selection_mode="single")
+            
+            pride = st.pills(translations["form_pride"][lang], [":rainbow[Yes]", "So so", "No"] , selection_mode="single")
+
+            exercises =  st.pills(translations["form_exercises"][lang], ["Spacer 🚶🏼‍♀️", "Pływanie 🏊🏼‍♀️", "Inne ⛹🏼‍♀️", "Nic ❌"] , selection_mode="multi")
+            
+            slow = st.pills(translations["form_slow"][lang], ["Tak", "Nie"] , selection_mode="single")
+            
+            relations = st.pills(translations["form_relations"][lang], ["💕", "🤍", "❤️‍🩹", "💔"] , selection_mode="single")
+
+            st.form_submit_button()
+
+            stats_df = pd.DataFrame({
+                "mood": form_map["mood"][mood],
+                "phisical": form_map["phisical"][phisical],
+                "pride": form_map["pride"][pride],
+                "exercises": exercises,
+                "slow": slow,
+                "relations": form_map["relations"][relations],
+                "date": dt.today().strftime('%d-%m-%Y')
+            })
+            st.write(stats_df)
+            stats_df.to_csv('stats.csv', mode='a', index=False, header=False)
+
+    st.write("Ćwiczyłaś dziś?")
+    squats_df = pd.DataFrame({"Ćwiczenie": ["Przysiady", "Brzuszki", "Pompki"],
+                                "Ilość": [0,0,0]})
+    squats = st.data_editor(squats_df)
+
+
+st.markdown(
+    """
+    <style>
+    textarea {
+        font-family: "Courier New", monospace !important;
+        font-size: 14px !important;
+        color: #333333 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 st.set_page_config(page_title=translations["page_title"][lang], layout="centered", page_icon="☀️")
 
@@ -198,3 +215,5 @@ for index, row in today_df.iterrows():
                 unsafe_allow_html=True
             )
             
+stats = pd.read_csv("stats.py")
+

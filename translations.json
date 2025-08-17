@@ -1,0 +1,68 @@
+{
+    "title": {
+        "pl": "Notatnik codzienny",
+        "en": "Diary Note"
+    },
+    "subtitle": {
+        "pl": "Jak Ci minął dzień",
+        "en": "How was your day?"
+    
+    },
+    "note_label": {
+        "pl": "Napisz co się dziś wydarzyło i jak się czyjesz:",
+        "en": "Wright something about your day:"
+    },
+    "save_button": {
+        "pl": "Zapisz",
+        "en": "Save"
+    },
+    "success_save_msg": {
+        "pl": "Notatka zapisana pomyślnie!",
+        "en": "Note saved successfully!"
+    },
+    "success_edit_msg": {
+        "pl": "Notatka edytowana pomyślnie!",
+        "en": "Note edit successfully!"
+    },
+    "edit": {
+        "pl": "Edytuj",
+        "en": "Edit"
+    },
+    "page_title":{
+        "pl": "Notatki",
+        "en": "Note"
+    },
+    "placeholder":{
+        "pl": "Nie możesz uzupełnić kolejnej notatki, jedna na dziś jest już zapisana.",
+        "en":"You cannot enter another note because the note for today is already saved."
+    },
+    "form_title": {
+        "pl": "Czy chcesz krótko opisać dzisiejszy dzień?",
+        "en": "If you want you can evaluete today"
+    },
+    "form_mood": {
+        "pl": "Jak dziś twoja kondycja psychiczna?",
+        "en": "How your emotional condition today?"
+    },
+    "form_phisical": {
+        "pl": "Jak dziś twoja kondycja fizyczna?",
+        "en": "How your phisical condition today?"
+    },
+    "form_pride": {
+        "pl": "Czy jesteś dziś z siebie dumna?",
+        "en":"Are you pride of yourself today?"
+    },
+    "form_exercises": {
+        "pl": "Udało ci się dziś spędzić trochę czasu aktywnie?",
+        "en": "Did you manage to spend some time actively today?"
+    },
+    "form_slow": {
+        "pl": "Udało Ci się dziś wyciszyć?",
+        "en": "Did you manage to calm down today?"
+    },
+    "form_relations": {
+        "pl": "Jak tam twoje relacje?",
+        "en": "How your relations?"
+    }
+
+}

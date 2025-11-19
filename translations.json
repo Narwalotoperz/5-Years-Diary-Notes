@@ -48,9 +48,9 @@
         "pl": "Jak dziś twoja kondycja fizyczna?",
         "en": "How your phisical condition today?"
     },
-    "form_pride": {
+    "form_proud": {
         "pl": "Czy jesteś dziś z siebie dumna?",
-        "en":"Are you pride of yourself today?"
+        "en":"Are you proud of yourself today?"
     },
     "form_exercises": {
         "pl": "Udało ci się dziś spędzić trochę czasu aktywnie?",
@@ -63,6 +63,30 @@
     "form_relations": {
         "pl": "Jak tam twoje relacje?",
         "en": "How your relations?"
+    },
+    "form_walk": {
+        "pl": "Spacer 🧍‍♀️",
+        "en": "Walk 🧍‍♀️"
+    },
+    "form_swimming": {
+        "pl": "Pływanie 🏊‍♂️",
+        "en": "Swimming 🏊‍♂️"
+    },
+    "form_other": {
+        "pl": "Inne 🏃‍♀️",
+        "en": "Other 🏃‍♀️"
+    },
+    "form_nothing": {
+        "pl": "Nic ❌",
+        "en": "Nothing ❌"
+    },
+    "yes": {
+        "pl": "Tak",
+        "en": "Yes"
+    },
+    "no": {
+        "pl": "Nie",
+        "en": "No"
     },
     "exercise_title":{
         "pl": "Ćwiczyłaś dziś?",

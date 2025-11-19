@@ -17,7 +17,7 @@ form_map = {
     "phisical": {
         "💪": 4, "👍": 3, "👎": 2, "🖕": 1, None: 0
         },   
-    "pride": {
+    "proud": {
         ":rainbow[Yes]": "Yes", "So so": "So so", "No": "No", None: None
         },
     "relations": {
@@ -95,11 +95,14 @@ with st.sidebar:
 
             phisical = st.pills(translations["form_phisical"][lang], ["💪", "👍", "👎", "🖕"] , selection_mode="single")
             
-            pride = st.pills(translations["form_pride"][lang], [":rainbow[Yes]", "So so", "No"] , selection_mode="single")
+            proud = st.pills(translations["form_proud"][lang], [":rainbow[Yes]", "So so", "No"] , selection_mode="single")
 
-            exercises =  st.pills(translations["form_exercises"][lang], ["Spacer 🚶🏼‍♀️", "Pływanie 🏊🏼‍♀️", "Inne ⛹🏼‍♀️", "Nic ❌"] , selection_mode="multi")
+            exercises =  st.pills(translations["form_exercises"][lang], [translations["form_walk"][lang],
+                                                                         translations["form_swimming"][lang],
+                                                                         translations["form_other"][lang],
+                                                                         translations["form_nothing"][lang]] , selection_mode="multi")
             
-            slow = st.pills(translations["form_slow"][lang], ["Tak", "Nie"] , selection_mode="single")
+            slow = st.pills(translations["form_slow"][lang], [translations["yes"][lang], translations["no"][lang]] , selection_mode="single")
             
             relations = st.pills(translations["form_relations"][lang], ["💕", "🤍", "❤️‍🩹", "💔"] , selection_mode="single")
 
@@ -108,7 +111,7 @@ with st.sidebar:
             stats_df = pd.DataFrame({
                 "mood": form_map["mood"][mood],
                 "phisical": form_map["phisical"][phisical],
-                "pride": form_map["pride"][pride],
+                "proud": form_map["proud"][proud],
                 "exercises": exercises,
                 "slow": slow,
                 "relations": form_map["relations"][relations],

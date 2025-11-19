@@ -63,6 +63,30 @@
     "form_relations": {
         "pl": "Jak tam twoje relacje?",
         "en": "How your relations?"
+    },
+    "exercise_title":{
+        "pl": "Ćwiczyłaś dziś?",
+        "en": "You exercised today?"
+    },
+    "exercise_exercise":{
+        "pl": "Ćwiczenie",
+        "en": "Exercise"
+    },
+    "exercise_squats": {
+        "pl": "Przysiady",
+        "en": "Squats"
+    },
+    "exercise_sit-ups": {
+        "pl": "Brzuszki",
+        "en": "Sit-ups"
+    },
+    "exercise_push-ups": {
+        "pl": "Pomki",
+        "en": "Push-ups"
+    },
+    "exercise_count": {
+        "pl": "Ilość",
+        "en": "Count"
     }
 
 }

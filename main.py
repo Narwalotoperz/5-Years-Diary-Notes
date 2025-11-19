@@ -74,7 +74,7 @@ def save_note_and_clear():
         if note_text != "":
             
             with open(file_path, 'a') as file:
-                file.write(f"{today_str}.\n{note_text}\n\n")
+                file.write(f"{today_str}\n{note_text}\n\n")
             st.session_state.note_input = "" 
             st.success(translations["success_edit_msg"][lang])
         else:
@@ -117,9 +117,11 @@ with st.sidebar:
             st.write(stats_df)
             stats_df.to_csv('stats.csv', mode='a', index=False, header=False)
 
-    st.write("Ćwiczyłaś dziś?")
-    squats_df = pd.DataFrame({"Ćwiczenie": ["Przysiady", "Brzuszki", "Pompki"],
-                                "Ilość": [0,0,0]})
+    st.write(translations['exercise_title'][lang])
+    squats_df = pd.DataFrame({translations['exercise_exercise'][lang]: [translations['exercise_squats'][lang],
+                                                                        translations['exercise_sit-ups'][lang],
+                                                                        translations['exercise_push-ups'][lang]],
+                                translations['exercise_count'][lang]: [0,0,0]})
     squats = st.data_editor(squats_df)
 
 
